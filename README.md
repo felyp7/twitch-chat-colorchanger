@@ -1,4 +1,12 @@
-# twitch-chat-colorchanger
+# Twitch-Chat-Color-Changer
+Updated version of https://github.com/NotNotQuinn/twitch-chat-colorchanger
+
+Configuration - https://github.com/NotNotQuinn/twitch-chat-colorchanger#readme
+
+
+
+
+
 Changes your chat color on twitch.tv to random colors, every so often, or optionally in a rainbow!
 
 ## Installation
