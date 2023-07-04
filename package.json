@@ -1,0 +1,31 @@
+{
+  "name": "twitch-chat-colorchanger",
+  "version": "1.0.0",
+  "description": "Changes your chat color on twitch.tv to random colors, every so often.",
+  "main": "color.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notnotquinn/twitch-chat-colorchanger.git"
+  },
+  "keywords": [
+    "twitch",
+    "bot",
+    "irc"
+  ],
+  "author": "Quinn T",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/notnotquinn/twitch-chat-colorchanger/issues"
+  },
+  "homepage": "https://github.com/notnotquinn/twitch-chat-colorchanger#readme",
+  "dependencies": {
+    "color": "^3.1.3",
+    "dank-twitch-irc": "^4.3.0",
+    "got": "^11.8.6",
+    "pm2": "^5.1.0"
+  }
+}
