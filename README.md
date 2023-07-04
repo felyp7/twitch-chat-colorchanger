@@ -14,8 +14,7 @@ Changes your chat color on twitch.tv to random colors, every so often, or option
 ![Image showing download button](https://i.imgur.com/ztyR5Mb.png)
 2. Open a terminal in the directory the code is in.
 3. Run `npm i` in the command line to install dependencies.
-4. Copy the `config.example.js` file to a file called `config.js`
-5. Edit the contents of the config file to hold your information, there is instructions in the file.
+4. Edit the contents of the config file to hold your information, there is instructions in the file.
 5. Register a chat bot application on https://dev.twitch.tv (top right)
     - For the redirect url, use https://localhost/
     - ![Image showing application registration screen](https://i.imgur.com/yjnI23y.png )
