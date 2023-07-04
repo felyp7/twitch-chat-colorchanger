@@ -9,7 +9,7 @@ Updated version of https://github.com/NotNotQuinn/twitch-chat-colorchanger
 Changes your chat color on twitch.tv to random colors, every so often, or optionally in a rainbow!
 
 ## Installation
-1. Make sure you have NodeJS installed, you can install it here: https://nodejs.org (Apparently need v16... so either install that version first or downgrade with https://github.com/nvm-sh/nvm)
+1. Make sure you have NodeJS installed, you can install it here: https://nodejs.org (Apparently need v16... so either install that version first or downgrade with https://github.com/nvm-sh/nvm.)
 2. Either clone the repository if you have git installed, or download the zip file of the code.
 ![Image showing download button](https://i.imgur.com/ztyR5Mb.png)
 2. Open a terminal in the directory the code is in.
