@@ -4,7 +4,3 @@
 # when you use the 'addColor' command.
 
 # The script will always join your channel.
-
-minusinsanity
-forsen
-lul85xD__
