@@ -144,8 +144,7 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
 
         (async () => {
             let channel = msg.messageText.split(" ")[1].toLowerCase()
-            const userId = await getUserId(channel);      
-            console.log(msg.messageText.split(" ")[1].toLowerCase())          
+            const userId = await getUserId(channel);            
             if (!userId) {
               client.privmsg(config.username, "Channel does not exist")
               ;return;
@@ -171,8 +170,7 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
 
             (async () => {
                 let channel = msg.messageText.split(" ")[1].toLowerCase()
-                const userId = await getUserId(channel);      
-                console.log(msg.messageText.split(" ")[1].toLowerCase())          
+                const userId = await getUserId(channel);             
                     if (!userId) {
                         client.privmsg(config.username, "Channel does not exist")
                         ;return;
