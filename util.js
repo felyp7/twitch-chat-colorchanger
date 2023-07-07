@@ -4,6 +4,7 @@ const config = require("./config");
 const got = require("got");
 const DankTwitch = require("dank-twitch-irc");
 const fs = require("fs");
+const { channel } = require("diagnostics_channel");
 
 
 // Util functions
@@ -121,17 +122,75 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
             
         }
         
+        async function getUserId(channel) {
+            try {
+              const response = await got(`https://api.ivr.fi/v2/twitch/user?login=${channel.replace("#","")}`, {
+                responseType: 'json',
+                throwHttpErrors: false,
+              });
+              if (!response.body[0]) {
+                const userId = "Channel does not exist"
+                ;return;
+              }
+              const userId = response.body[0].id;
+              return userId;
+            } catch (error) {
+              console.error(error);
+              return null;
+            }
+          }
+
         if (msg.messageText.startsWith("addColor") && msg.senderUsername == config.username.toLowerCase()) {
+
+        (async () => {
             let channel = msg.messageText.split(" ")[1].toLowerCase()
-            if (channels.indexOf(channel) == -1) {
-                anonClient.join(channel);
-                channels.push(channel)
-                setChannels(channels, config)
-                client.privmsg(config.username, "channel added")
+            const userId = await getUserId(channel);      
+            console.log(msg.messageText.split(" ")[1].toLowerCase())          
+            if (!userId) {
+              client.privmsg(config.username, "Channel does not exist")
+              ;return;
+            } else if (userId){
+                let channel = msg.messageText.split(" ")[1].toLowerCase()
+                if (channels.indexOf(channel) == -1) {
+                    anonClient.join(channel);
+                    channels.push(channel)
+                    setChannels(channels, config)
+                    client.privmsg(config.username, "channel added")
             } else {
                 client.privmsg(config.username, "Channel already on the list")
+            }               
+            } else {
+                console.log('Error getting user ID');                
             }
+        })();
         };
+
+        if (msg.messageText.startsWith("removeColor") && msg.senderUsername == config.username.toLowerCase()) {
+            let channel = msg.messageText.split(" ")[1].toLowerCase();
+            let index = channels.indexOf(channel);
+
+            (async () => {
+                let channel = msg.messageText.split(" ")[1].toLowerCase()
+                const userId = await getUserId(channel);      
+                console.log(msg.messageText.split(" ")[1].toLowerCase())          
+                    if (!userId) {
+                        client.privmsg(config.username, "Channel does not exist")
+                        ;return;
+                    } else if (userId){
+                        if (channel == config.username.toLowerCase()) {
+                            client.privmsg(config.username, "Can't remove your own channel");
+                        } else if (index !== -1) {
+                            anonClient.part(channel);
+                            channels.splice(index, 1);
+                            setChannels(channels, config);
+                            client.privmsg(config.username, "Channel removed");
+                        }
+                    } else {
+                        console.log('Error getting user ID');
+                    }
+            })();
+        }
+        
         if (msg.senderUsername == config.username && useColor == true) {
             log('INFO', `[${msg.channelName}] ${msg.senderUsername}: ${msg.messageText}`)
             UpdateColorMethod()
