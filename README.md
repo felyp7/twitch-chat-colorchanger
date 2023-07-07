@@ -65,3 +65,6 @@ This script has a few chat commands. They will only respond in your channel to a
 - `"addColor"`
   - adds the channel to the channels that change color
     for example: "`addColor justin`" will add `justin` to the channels text file and join it.
+- `"removeColor"`
+  - removes the channel from channels that change color
+    for example: "`removeColor justin`" will remove `justin` from the channels text file and part it.
