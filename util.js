@@ -138,15 +138,35 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
               console.error(error);
               return null;
             }
-          }
+        }
 
-        if (msg.messageText.startsWith("addColor") && msg.senderUsername == config.username.toLowerCase()) {
+        async function getUserBan(channel) {
+            try {
+              const response = await got(`https://api.ivr.fi/v2/twitch/user?login=${channel.replace("#","")}`, {
+                responseType: 'json',
+                throwHttpErrors: false,
+              });
+              if (!response.body[0]) {
+                const userId = "Channel does not exist"
+                ;return;
+              }
+              const banned = response.body[0].banned;
+              return banned;
+            } catch (error) {
+              console.error(error);
+              return null;
+            }
+        }
+
+
+        if (msg.messageText.startsWith("addColor") && msg.senderUsername == config.username.toLowerCase() && msg.channelName.replace("#","") == config.username.toLowerCase()) {
 
         (async () => {
             let channel = msg.messageText.split(" ")[1].toLowerCase()
-            const userId = await getUserId(channel);            
-            if (!userId) {
-              client.privmsg(config.username, "Channel does not exist")
+            const userId = await getUserId(channel);   
+            const banned = await getUserBan(channel);        
+            if (!userId || banned == true) {
+              client.privmsg(config.username, "Channel does not exist or is banned")
               ;return;
             } else if (userId){
                 let channel = msg.messageText.split(" ")[1].toLowerCase()
@@ -164,15 +184,16 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
         })();
         };
 
-        if (msg.messageText.startsWith("removeColor") && msg.senderUsername == config.username.toLowerCase()) {
+        if (msg.messageText.startsWith("removeColor") && msg.senderUsername == config.username.toLowerCase() && msg.channelName.replace("#","") == config.username.toLowerCase()) {
             let channel = msg.messageText.split(" ")[1].toLowerCase();
             let index = channels.indexOf(channel);
 
             (async () => {
                 let channel = msg.messageText.split(" ")[1].toLowerCase()
-                const userId = await getUserId(channel);             
-                    if (!userId) {
-                        client.privmsg(config.username, "Channel does not exist")
+                const userId = await getUserId(channel);  
+                const banned = await getUserBan(channel);                   
+                    if (!userId || banned == true) {
+                        client.privmsg(config.username, "Channel does not exist or is banned")
                         ;return;
                     } else if (userId){
                         if (channel == config.username.toLowerCase()) {
