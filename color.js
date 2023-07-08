@@ -87,7 +87,7 @@ function updateColor() {
         color = nonPrimeColor()
     }
     if (client.connections.length > 0) {
-        util.log('color', color)
+        util.log('color', '\x1b[36m' + color +'\x1b[0m')
         async function changeUsernameColor(color) {
             await got(
                 `https://api.twitch.tv/helix/chat/color?user_id=${global.userId}&color=${encodeURIComponent(color)}`,
