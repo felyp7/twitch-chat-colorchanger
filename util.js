@@ -78,10 +78,10 @@ const showInfo = (config) => {
         if (!config.usePrimeColors) {
             rainbowMessage = "Rainbow is on, but prime colors are off. Using random default color."
         }
-        log('info', '\x1b[33m' + rainbowMessage + '\x1b[0m');
+        log('info', '\x1b[32m' + rainbowMessage + '\x1b[0m');
     }
-    log('info', '\x1b[33m' + `All commands are only sent to YOUR chat (#${config.username})` + '\x1b[0m')
-    log('info', '\x1b[33m' + primeMessage + '\x1b[0m')
+    log('info', '\x1b[32m' + `All commands are only sent to YOUR chat (#${config.username})` + '\x1b[0m')
+    log('info', '\x1b[32m' + primeMessage + '\x1b[0m')
 }
 
 
@@ -113,11 +113,11 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
             if(useColor){
                 useColor = false;
                 client.privmsg(config.username, `Color is now off Kappa`)
-                log('info', '\x1b[33m' +"Color is now off"+ '\x1b[0m')
+                log('info', '\x1b[32m' +"Color is now off"+ '\x1b[0m')
             }else{
                 useColor = true;
                 client.privmsg(config.username, `Color is now on KappaPride`)
-                log('info', '\x1b[33m' +"Color is now on"+ '\x1b[0m')
+                log('info', '\x1b[32m' +"Color is now on"+ '\x1b[0m')
             }
             
         }
