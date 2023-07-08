@@ -14,7 +14,7 @@ const { channel } = require("diagnostics_channel");
  * @param {any} thing Thing to log
  */
 const log = (level, thing) => {
-    console.log(`${new Date().toLocaleTimeString()} | ${level.toUpperCase()} -`, thing)
+    console.log(`\x1b[34m${new Date().toLocaleTimeString()}\x1b[0m | ${level.toUpperCase()} -`, thing);
 }
 
 /**
@@ -78,10 +78,10 @@ const showInfo = (config) => {
         if (!config.usePrimeColors) {
             rainbowMessage = "Rainbow is on, but prime colors are off. Using random default color."
         }
-        log(`info`, rainbowMessage)
+        log('info', '\x1b[33m' + rainbowMessage + '\x1b[0m');
     }
-    log('info', `All commands are only sent to YOUR chat (#${config.username})`)
-    log('info', primeMessage)
+    log('info', '\x1b[33m' + `All commands are only sent to YOUR chat (#${config.username})` + '\x1b[0m')
+    log('info', '\x1b[33m' + primeMessage + '\x1b[0m')
 }
 
 
@@ -113,11 +113,11 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
             if(useColor){
                 useColor = false;
                 client.privmsg(config.username, `Color is now off Kappa`)
-                log('info', "Color is now off")
+                log('info', '\x1b[33m' +"Color is now off"+ '\x1b[0m')
             }else{
                 useColor = true;
                 client.privmsg(config.username, `Color is now on KappaPride`)
-                log('info', "Color is now on")
+                log('info', '\x1b[33m' +"Color is now on"+ '\x1b[0m')
             }
             
         }
@@ -211,17 +211,17 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
         }
         
         if (msg.senderUsername == config.username && useColor == true) {
-            log('INFO', `[${msg.channelName}] ${msg.senderUsername}: ${msg.messageText}`)
+            log('INFO', '\x1b[35m' +`[${msg.channelName}] `+ '\x1b[0m' + `${msg.senderUsername}: ${msg.messageText}`)
             UpdateColorMethod()
         }
     })
     
     anonClient.on("ready", () => {
-        log('INFO', `Anonymous client connected.`)
+        log('INFO', '\x1b[90m' + `Anonymous client connected.`+'\x1b[0m')
     })
     
     anonClient.on("JOIN", (msg) => {
-        log('INFO', `Anonymous client joined #${msg.channelName}.`)
+        log('INFO', '\x1b[90m' + `Anonymous client joined #${msg.channelName}.`+'\x1b[0m')
     })
 
     return anonClient
