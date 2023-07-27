@@ -58,8 +58,23 @@ function rainbowHex() {
 
 function nonPrimeColor() {
     let out = "";
-    const primeColors = ["Blue", "BlueViolet", "CadetBlue", "Chocolate", "Coral", "DodgerBlue", "Firebrick", "GoldenRod", "Green", "HotPink", "OrangeRed", "Red", "SeaGreen", "SpringGreen", "YellowGreen"];
-
+    const primeColors = [
+        "Blue",
+        "Blue_Violet",
+        "Cadet_Blue",
+        "Chocolate",
+        "Coral",
+        "Dodger_Blue",
+        "Firebrick",
+        "Golden_Rod",
+        "Green",
+        "Hot_Pink",
+        "Orange_Red",
+        "Red",
+        "Sea_Green",
+        "Spring_Green",
+        "Yellow_Green",
+        ];
     // just pick one at random
     out += primeColors[util.randInt(primeColors.length)];
 
