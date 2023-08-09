@@ -68,3 +68,6 @@ This script has a few chat commands. They will only respond in your channel to a
 - `"removeColor"`
   - removes the channel from channels that change color
     for example: "`removeColor justin`" will remove `justin` from the channels text file and part it.
+- `"setSpeed"`
+  - sets the speed of the rainbow transition
+    for example: "`setSpeed 10`" will set `rainbowSpeed` in config to 10.
