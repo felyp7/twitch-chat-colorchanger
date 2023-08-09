@@ -2,8 +2,8 @@
 const Color = require("color");
 const config = require("./config");
 const got = require("got");
+const fs = require('fs');
 const DankTwitch = require("dank-twitch-irc");
-const fs = require("fs");
 const { channel } = require("diagnostics_channel");
 
 
@@ -106,9 +106,22 @@ const getAnonClient = (client, config, channels, UpdateColorMethod) => {
     const anonClient = new DankTwitch.ChatClient();
 
     anonClient.on("PRIVMSG", (msg) => {
-        
+        const args = msg.messageText.slice(1).split(' ')
         // whenever the anon client sees a message, it just checks if the sender is you,
         // then it will update the color if it is.
+
+        if(msg.messageText.startsWith("setSpeed") && msg.senderUsername == config.username){
+            if (Number.isInteger(Number(args[1]))) {
+            config.rainbowSpeed = parseInt(args[1])
+            const updatedConfigContent = `module.exports = ${JSON.stringify(config, null, 2)};\n`;
+            fs.writeFileSync('./config.js', updatedConfigContent, 'utf-8');
+            client.privmsg(config.username, `Rainbow Speed updated to ${args[1]}`)
+            log('info', '\x1b[32m' +`Rainbow Speed updated to ${args[1]}`+ '\x1b[0m')
+            } else {
+                client.privmsg(config.username, `Speed must be a number...`)
+            }
+        }
+
         if(msg.messageText == "toggleColor" && msg.senderUsername == config.username){
             if(useColor){
                 useColor = false;
